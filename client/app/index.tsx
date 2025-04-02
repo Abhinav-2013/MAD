@@ -22,6 +22,7 @@ export default function App() {
         <Stack.Screen name="SelectSport" component={SportSelectionScreen} />
         <Stack.Screen name="SelectTime" component={CalendarScreen} />
         <Stack.Screen name="Confirmation" component={ConfirmationScreen} />
+        <Stack.Screen name="+not-found" />
       </Stack.Navigator>
   );
 }
