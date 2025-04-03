@@ -7,6 +7,7 @@ const images = [
   require("../assets/images/sport1.jpg"),
   require("../assets/images/sport2.jpg"),
   require("../assets/images/sport3.jpg"),
+  require("../assets/images/sport4.jpg"),
 ];
 
 export default function CalendarScreen() {
