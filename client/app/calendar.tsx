@@ -54,11 +54,6 @@ export default function CalendarScreen() {
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  },
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.4)",
     padding: 20,

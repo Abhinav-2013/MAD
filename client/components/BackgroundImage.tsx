@@ -1,5 +1,4 @@
 import { ImageBackground, StyleSheet } from "react-native";
-import { useState } from "react";
 import { images, Sport } from "@/assets/images";
 import React from "react";
 
