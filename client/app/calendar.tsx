@@ -1,38 +1,29 @@
-import { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from "react-native";
+import { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useLocalSearchParams, useRouter } from "expo-router";
-
-const images = [
-  require("../assets/images/sport1.jpg"),
-  require("../assets/images/sport2.jpg"),
-  require("../assets/images/sport3.jpg"),
-  require("../assets/images/sport4.jpg"),
-];
+import {Sport} from "@/assets/images";
+import React from "react";
+import BackgroundImage from "@/components/BackgroundImage";
 
 export default function CalendarScreen() {
   const { sport } = useLocalSearchParams();
   const router = useRouter();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [bgImage, setBgImage] = useState(images[0]);
 
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      index = (index + 1) % images.length;
-      setBgImage(images[index]);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  let sport1 = undefined;
+  if (typeof sport === "string") {
+    sport1 = (["football", "basketball", "cricket", "tennis", "badminton"].includes(sport) ? sport : undefined) as Sport | undefined;
+  }
 
   return (
-    <ImageBackground source={bgImage} style={styles.background}>
+    <BackgroundImage sport={sport1} >
       <View style={styles.overlay}>
         <Text style={styles.title}>Select a Date for {sport}</Text>
 
         <View style={styles.calendarContainer}>
           <Calendar
-            onDayPress={(day) => setSelectedDate(day.dateString)}
+            onDayPress={(day: { dateString: React.SetStateAction<string | null>; }) => setSelectedDate(day.dateString)}
             markedDates={{ [selectedDate || ""]: { selected: true, selectedColor: "#4CAF50" } }}
             theme={{
               backgroundColor: "transparent",
@@ -58,16 +49,39 @@ export default function CalendarScreen() {
           <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
       </View>
-    </ImageBackground>
+    </BackgroundImage>
   );
 }
 
 const styles = StyleSheet.create({
-  background: { flex: 1, justifyContent: "center", alignItems: "center" },
-  overlay: { backgroundColor: "rgba(0, 0, 0, 0.4)", padding: 20, borderRadius: 10, alignItems: "center" },
-  title: { fontSize: 24, fontWeight: "bold", color: "#fff", marginBottom: 20, textAlign: "center" },
-  calendarContainer: { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: 10, padding: 10 }, // Transparent
-  selectedDate: { marginTop: 10, fontSize: 18, color: "#fff" },
+  background: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center"
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 20,
+    textAlign: "center"
+  },
+  calendarContainer: {
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    borderRadius: 10,
+    padding: 10
+  },
+  selectedDate: {
+    marginTop: 10,
+    fontSize: 18,
+    color: "#fff"
+  },
   button: {
     backgroundColor: "rgba(128, 128, 128, 0.6)", // Semi-transparent gray
     paddingVertical: 15,
@@ -76,6 +90,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
-  buttonText: { fontSize: 18, fontWeight: "bold", color: "#fff" },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff"
+  },
 });
 

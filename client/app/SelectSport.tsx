@@ -1,12 +1,15 @@
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from "react-native";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
+import { Sport } from "@/assets/images";
+// import images from "../components/images";
+import React from "react";
 
 const images = [
-  require("../assets/images/sport1.jpg"),
-  require("../assets/images/sport2.jpg"),
-  require("../assets/images/sport3.jpg"),
-  require("../assets/images/sport4.jpg"),
+  require("@/assets/images/sport1.jpg"),
+  require("@/assets/images/sport2.jpg"),
+  require("@/assets/images/sport3.jpg"),
+  require("@/assets/images/sport4.jpg"),
 ];
 
 export default function SportSelectionScreen() {
@@ -22,7 +25,8 @@ export default function SportSelectionScreen() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSelectSport = (sport: string) => {
+  const handleSelectSport = (rawValue: string) => {
+    const sport = (["football", "basketball", "cricket", "tennis", "badminton"].includes(rawValue) ? rawValue : undefined) as Sport | undefined;
     router.push({ pathname: "/calendar", params: { sport } });
   };
 
@@ -31,23 +35,23 @@ export default function SportSelectionScreen() {
       <View style={styles.overlay}>
         <Text style={styles.title}>Select a Sport</Text>
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("Football")}>
+        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("football")}>
           <Text style={styles.buttonText}>Football</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("Basketball")}>
+        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("basketball")}>
           <Text style={styles.buttonText}>Basketball</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("Tennis")}>
+        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("tennis")}>
           <Text style={styles.buttonText}>Tennis</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("Cricket")}>
+        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("cricket")}>
           <Text style={styles.buttonText}>Cricket</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("Badminton")}>
+        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("badminton")}>
           <Text style={styles.buttonText}>Badminton</Text>
         </TouchableOpacity>
       </View>
@@ -56,9 +60,24 @@ export default function SportSelectionScreen() {
 }
 
 const styles = StyleSheet.create({
-  background: { flex: 1, justifyContent: "center", alignItems: "center" },
-  overlay: { backgroundColor: "rgba(0, 0, 0, 0.4)", padding: 20, borderRadius: 10, alignItems: "center" },
-  title: { fontSize: 24, fontWeight: "bold", color: "#fff", marginBottom: 20, textAlign: "center" },
+  background: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center"
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 20,
+    textAlign: "center"
+  },
   button: {
     backgroundColor: "rgba(128, 128, 128, 0.6)",
     paddingVertical: 15,
@@ -68,5 +87,9 @@ const styles = StyleSheet.create({
     marginVertical: 10, // Adds spacing between buttons
     width: 200, // Sets a uniform width
   },
-  buttonText: { fontSize: 18, fontWeight: "bold", color: "#fff" },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff"
+  },
 });

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import React from "react";
 
 const images = [
   require("../assets/images/sport1.jpg"),
@@ -39,11 +40,43 @@ export default function ConfirmationScreen() {
 }
 
 const styles = StyleSheet.create({
-  background: { flex: 1, width: "100%", height: "100%", justifyContent: "center" },
-  overlay: { flex: 1, backgroundColor: "rgba(0, 0, 0, 0.5)", alignItems: "center", justifyContent: "center", paddingHorizontal: 20 },
-  title: { fontSize: 28, color: "#fff", fontWeight: "bold", marginBottom: 20, textAlign: "center" },
-  text: { fontSize: 18, color: "#fff", textAlign: "center", marginBottom: 20 },
-  button: { backgroundColor: "rgba(128, 128, 128, 0.7)", paddingVertical: 12, paddingHorizontal: 30, borderRadius: 10, marginTop: 20 },
-  buttonText: { color: "#fff", fontSize: 18, fontWeight: "bold" },
+  background: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    justifyContent: "center"
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20
+  },
+  title: {
+    fontSize: 28,
+    color: "#fff",
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center"
+  },
+  text: {
+    fontSize: 18,
+    color: "#fff",
+    textAlign: "center",
+    marginBottom: 20
+  },
+  button: {
+    backgroundColor: "rgba(128, 128, 128, 0.7)",
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginTop: 20
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold"
+  },
 });
 
