@@ -4,6 +4,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { Sport } from "@/assets/images";
 import React from "react";
 import BackgroundImage from "@/components/BackgroundImage";
+import Button from "@/components/Button";
 
 const timeSlots = ["10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM", "6:00 PM"];
 // const images = [
@@ -21,17 +22,6 @@ export default function TimeSelectionScreen() {
   if (typeof sport === "string") {
     sport1 = (["football", "basketball", "cricket", "tennis", "badminton"].includes(sport) ? sport : undefined) as Sport | undefined;
   }
-  // const [bgImage, setBgImage] = useState(images[0]);
-
-  // // Slideshow effect
-  // useEffect(() => {
-  //   let index = 0;
-  //   const interval = setInterval(() => {
-  //     index = (index + 1) % images.length;
-  //     setBgImage(images[index]);
-  //   }, 3000);
-  //   return () => clearInterval(interval);
-  // }, []);
 
   return (
     <BackgroundImage sport={sport1} >
@@ -40,18 +30,20 @@ export default function TimeSelectionScreen() {
 
         <View style={styles.buttonContainer}>
           {timeSlots.map((time) => (
-            <TouchableOpacity key={time} style={[styles.button, selectedTime === time && styles.selectedButton]} onPress={() => setSelectedTime(time)}>
-              <Text style={styles.buttonText}>{time}</Text>
-            </TouchableOpacity>
+            // <TouchableOpacity key={time} style={[styles.button, selectedTime === time && styles.selectedButton]} onPress={() => setSelectedTime(time)}>
+            //   <Text style={styles.buttonText}>{time}</Text>
+            // </TouchableOpacity>
+            <Button key={time} buttonPress={() => setSelectedTime(time)} text={time} />
           ))}
         </View>
 
         {selectedTime && (
           <>
             <Text style={styles.selectedTime}>Selected: {selectedTime}</Text>
-            <TouchableOpacity style={styles.confirmButton} onPress={() => router.push({ pathname: "/ConfirmationScreen", params: { sport, date, time: selectedTime } })}>
-              <Text style={styles.buttonText}>Confirm Booking</Text>
-            </TouchableOpacity>
+            <Button
+              buttonPress={() => router.push({ pathname: "/ConfirmationScreen", params: { sport, date, time: selectedTime } })}
+              text="Confirm Time"
+            />
           </>
         )}
       </View>
@@ -61,11 +53,11 @@ export default function TimeSelectionScreen() {
 
 const styles = StyleSheet.create({
   overlay: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    paddingVertical: 20,
   },
   title: {
     fontSize: 24,
@@ -87,12 +79,16 @@ const styles = StyleSheet.create({
     width: 300
   },
   selectedButton: {
-    backgroundColor: "rgba(255, 255, 255, 0.9)" },
-    buttonText: { color: "#fff", fontSize: 18, textAlign:"center" },
-    selectedTime: { fontSize: 18, color: "#fff", marginBottom: 20 },
-    confirmButton: { backgroundColor: "rgba(255, 255, 255, 0.8)",
-    paddingVertical: 12,
-    paddingHorizontal: 40,
-    borderRadius: 10
+    backgroundColor: "rgba(255, 255, 255, 0.9)"
   },
+    buttonText: {
+      color: "#fff",
+      fontSize: 18,
+      textAlign:"center"
+    },
+    selectedTime: {
+      fontSize: 18,
+      color: "#fff",
+      marginBottom: 20
+    },
 });

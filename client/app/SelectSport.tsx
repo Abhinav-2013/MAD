@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Sport } from "@/assets/images";
 // import images from "../components/images";
 import React from "react";
+import Button from "@/components/Button";
 
 const images = [
   require("@/assets/images/sport1.jpg"),
@@ -35,25 +36,16 @@ export default function SportSelectionScreen() {
       <View style={styles.overlay}>
         <Text style={styles.title}>Select a Sport</Text>
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("football")}>
-          <Text style={styles.buttonText}>Football</Text>
-        </TouchableOpacity>
+        <Button buttonPress={() => handleSelectSport("football")} text="Football" />
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("basketball")}>
-          <Text style={styles.buttonText}>Basketball</Text>
-        </TouchableOpacity>
+        <Button buttonPress={() => handleSelectSport("basketball")} text="Basketball" />
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("tennis")}>
-          <Text style={styles.buttonText}>Tennis</Text>
-        </TouchableOpacity>
+        <Button buttonPress={() => handleSelectSport("tennis")} text="Tennis" />
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("cricket")}>
-          <Text style={styles.buttonText}>Cricket</Text>
-        </TouchableOpacity>
+        <Button buttonPress={() => handleSelectSport("cricket")} text={"Cricket"} />
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSelectSport("badminton")}>
-          <Text style={styles.buttonText}>Badminton</Text>
-        </TouchableOpacity>
+        <Button buttonPress={() => handleSelectSport("badminton")} text="Badminton" />
+
       </View>
     </ImageBackground>
   );
@@ -77,19 +69,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginBottom: 20,
     textAlign: "center"
-  },
-  button: {
-    backgroundColor: "rgba(128, 128, 128, 0.6)",
-    paddingVertical: 15,
-    paddingHorizontal: 40,
-    borderRadius: 10,
-    alignItems: "center",
-    marginVertical: 10, // Adds spacing between buttons
-    width: 200, // Sets a uniform width
-  },
-  buttonText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#fff"
   },
 });

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
+import Button from "@/components/Button";
 
 const images = [
   require("../assets/images/sport1.jpg"),
@@ -31,9 +32,7 @@ export default function ConfirmationScreen() {
         <Text style={styles.title}>Booking Confirmed 🎉</Text>
         <Text style={styles.text}>You have booked the {sport} field on {date} at {time}</Text>
 
-        <TouchableOpacity style={styles.button} onPress={() => router.push("/")}>
-          <Text style={styles.buttonText}>Go Back to Home</Text>
-        </TouchableOpacity>
+        <Button buttonPress={() => router.push("/")} text="Go Back to Home" />
       </View>
     </ImageBackground>
   );
@@ -65,18 +64,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     marginBottom: 20
-  },
-  button: {
-    backgroundColor: "rgba(128, 128, 128, 0.7)",
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderRadius: 10,
-    marginTop: 20
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold"
   },
 });
 

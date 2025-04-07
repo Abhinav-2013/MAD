@@ -5,6 +5,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import {Sport} from "@/assets/images";
 import React from "react";
 import BackgroundImage from "@/components/BackgroundImage";
+import Button from "@/components/Button";
 
 export default function CalendarScreen() {
   const { sport } = useLocalSearchParams();
@@ -17,7 +18,7 @@ export default function CalendarScreen() {
   }
 
   return (
-    <BackgroundImage sport={sport1} >
+    <BackgroundImage sport={sport1}>
       <View style={styles.overlay}>
         <Text style={styles.title}>Select a Date for {sport}</Text>
 
@@ -42,12 +43,10 @@ export default function CalendarScreen() {
 
         {selectedDate && <Text style={styles.selectedDate}>You selected: {selectedDate}</Text>}
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => selectedDate && router.push({ pathname: "/TimeSelectionScreen", params: { sport, date: selectedDate } })}
-        >
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
+        <Button
+          buttonPress={() => selectedDate && router.push({ pathname: "/TimeSelectionScreen", params: { sport, date: selectedDate } })}
+          text="Next"
+        />
       </View>
     </BackgroundImage>
   );
