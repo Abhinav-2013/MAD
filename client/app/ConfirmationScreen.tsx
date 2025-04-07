@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import Button from "@/components/Button";
