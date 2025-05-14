@@ -5,3 +5,4 @@ dist/
 */expo-env.d.ts
 */.metro-health-check*
 .idea/
+*/.env
