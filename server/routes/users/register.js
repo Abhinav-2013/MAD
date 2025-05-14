@@ -9,11 +9,10 @@ const createID = () => {
 
 router.post('/', async (req, res) => {
     const {name, email, password} = req.body;
-    const id = createID();
-    const newUser = [id, name, email, password];
+    const newUser = [name, email, password];
     // console.log(newUser);
-    const query = `insert into users (id, name, email, password)
-                   VALUES (?, ?, ?, ?)`;
+    const query = `insert into users (name, email, password)
+                   VALUES (?, ?, ?)`;
     try {
         const [rows] = await pool.query(query, newUser);
         res.status(200).send({

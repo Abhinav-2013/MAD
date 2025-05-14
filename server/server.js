@@ -3,6 +3,7 @@ require('dotenv').config();
 const pool = require('./db');
 const registerRoute = require('./routes/users/register');
 const loginRoute = require('./routes/users/login');
+const availableRoute = require('./routes/fields/availability');
 
 const app = express();
 app.use(express.json());
@@ -18,6 +19,7 @@ const port = process.env.PORT || 5000;
 // Routes
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
+app.use('/availability', availableRoute);
 
 app.get('/users', async (req, res) => {
     const query = "select * from users";

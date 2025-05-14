@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require("../../db");
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 router.post('/', async (req, res) => {
     const { email, password } = req.body;
@@ -8,9 +9,13 @@ router.post('/', async (req, res) => {
     try {
         const [rows] = await pool.query(query, [email, password]);
         if (rows.length > 0) {
+            // Generate JWT
+            const token = jwt.sign({id: rows[0].id}, process.env.JWT_SECRET, { expiresIn: '1h' });
+
             res.status(200).json({
                 success: true,
                 message: `Successfully logged in`,
+                token,
                 user: rows[0],
             });
         } else {
