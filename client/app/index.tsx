@@ -26,6 +26,9 @@ export default function HomeScreen() {
 
   return (
     <ImageBackground source={bgImage} style={styles.background}>
+      <View />
+        <Button buttonPress={() => router.push("/apiTest")} text="Api Test" />
+      <View />
       <View style={styles.overlay}>
         <Text style={styles.title}>Welcome to the Sports Booking App</Text>
         <Button buttonPress={() => router.push("/SelectSport")} text="Select Sport" />
