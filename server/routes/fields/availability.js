@@ -32,7 +32,7 @@ router.post("/", authenticateToken, async (req, res) => {
             res.status(200).json({
                 success: true,
                 message: `Field is available`,
-                price: price,
+                price,
             });
         } else {
             res.status(200).json({

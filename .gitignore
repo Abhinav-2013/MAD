@@ -6,3 +6,4 @@ dist/
 */.metro-health-check*
 .idea/
 */.env
+*/coverage/
