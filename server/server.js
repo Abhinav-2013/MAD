@@ -4,6 +4,7 @@ const pool = require('./db');
 const registerRoute = require('./routes/users/register');
 const loginRoute = require('./routes/users/login');
 const availableRoute = require('./routes/fields/availability');
+const createBookingRoute = require('./routes/fields/createBooking');
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,7 @@ const port = process.env.PORT || 5000;
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/availability', availableRoute);
+app.use('/booking', createBookingRoute);
 
 app.get('/users', async (req, res) => {
     const query = "select * from users";
@@ -31,26 +33,33 @@ app.get('/users', async (req, res) => {
     }
 });
 
-const server = app.listen(port, () => {
-    console.log(`server listening on port ${port}`);
-});
+// Only start the server if this file is run directly
+if (require.main === module) {
+    const server = app.listen(port, () => {
+        console.log(`server listening on port ${port}`);
+    });
 
-process.on('SIGINT', async () => {
-    console.log("Shutting Down Server");
-    try {
-        await new Promise((resolve, reject) => {
-            server.close((err) => {
-                if (err) return reject(err);
-                resolve();
+    process.on('SIGINT', async () => {
+        console.log("Shutting Down Server");
+        try {
+            await new Promise((resolve, reject) => {
+                server.close((err) => {
+                    if (err) return reject(err);
+                    resolve();
+                });
             });
-        });
 
-        await pool.end();
-        console.log("Connection closed");
+            await pool.end();
+            console.log("Connection closed");
 
-        process.exit(0);
-    } catch (error) {
-        console.error("Error during shutdown:", error);
-        process.exit(1);
-    }
-});
+            process.exit(0);
+        } catch (error) {
+            console.error("Error during shutdown:", error);
+            process.exit(1);
+        }
+    });
+} else {
+    // Export for testing
+    module.exports = app;
+}
+
