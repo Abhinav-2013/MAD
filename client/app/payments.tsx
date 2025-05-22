@@ -10,7 +10,7 @@ const images = [
   require("@/assets/images/sport4.jpg"),
 ];
 
-export default function LoginScreen() {
+export default function Payments() {
   const router = useRouter();
   const [bgImage, setBgImage] = useState(images[0]);
 
@@ -26,9 +26,8 @@ export default function LoginScreen() {
   return (
     <ImageBackground source={bgImage} style={styles.background}>
       <View style={styles.overlay}>
-        <Text style={styles.title}>Welcome to the Sports Booking App</Text>
-        <Button buttonPress={() => router.push("/login2")} text="Login" />
-        <Button buttonPress={() => router.push("/signup")} text="Sign Up" />
+        <Text style={styles.title}>Please Pay</Text>
+        <Button text="Complete Payment" buttonPress={() => router.push("/ConfirmationScreen")} />
       </View>
     </ImageBackground>
   );
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: "#fff",
-    textAlign: "center",
-    marginBottom: 20
+    marginBottom: 20,
+    textAlign: "center"
   }
 });

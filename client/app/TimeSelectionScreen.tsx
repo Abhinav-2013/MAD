@@ -41,7 +41,7 @@ export default function TimeSelectionScreen() {
           <>
             <Text style={styles.selectedTime}>Selected: {selectedTime}</Text>
             <Button
-              buttonPress={() => router.push({ pathname: "/ConfirmationScreen", params: { sport, date, time: selectedTime } })}
+              buttonPress={() => router.push({ pathname: "/checkavail", params: { sport, date, time: selectedTime } })}
               text="Confirm Time"
             />
           </>

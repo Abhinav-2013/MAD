@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, ImageBackground, Image } from "react-native";
 import { useRouter } from "expo-router";
-import Button from "@/components/Button";
 
 const images = [
   require("@/assets/images/sport1.jpg"),
@@ -10,7 +9,7 @@ const images = [
   require("@/assets/images/sport4.jpg"),
 ];
 
-export default function LoginScreen() {
+export default function CheckAvailability() {
   const router = useRouter();
   const [bgImage, setBgImage] = useState(images[0]);
 
@@ -20,15 +19,21 @@ export default function LoginScreen() {
       index = (index + 1) % images.length;
       setBgImage(images[index]);
     }, 3000);
-    return () => clearInterval(interval);
+    const timer = setTimeout(() => {
+      router.push("/payments");
+    }, 4000);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
     <ImageBackground source={bgImage} style={styles.background}>
       <View style={styles.overlay}>
-        <Text style={styles.title}>Welcome to the Sports Booking App</Text>
-        <Button buttonPress={() => router.push("/login2")} text="Login" />
-        <Button buttonPress={() => router.push("/signup")} text="Sign Up" />
+        <Image source={require("../assets/images/football.gif")} style={styles.image} />
+
+        <Text style={styles.title}>Please wait, checking for availability of the slot...</Text>
       </View>
     </ImageBackground>
   );
@@ -47,10 +52,13 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 20,
     color: "#fff",
     textAlign: "center",
-    marginBottom: 20
+    marginTop: 20
+  },
+  image: {
+    width: 100,
+    height: 100
   }
 });

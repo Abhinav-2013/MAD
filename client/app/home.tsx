@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import { useRouter } from "expo-router";
+import { useEffect, useState } from "react";
+import React from "react";
 import Button from "@/components/Button";
 
 const images = [
@@ -10,7 +11,7 @@ const images = [
   require("@/assets/images/sport4.jpg"),
 ];
 
-export default function LoginScreen() {
+export default function HomeScreen() {
   const router = useRouter();
   const [bgImage, setBgImage] = useState(images[0]);
 
@@ -19,16 +20,18 @@ export default function LoginScreen() {
     const interval = setInterval(() => {
       index = (index + 1) % images.length;
       setBgImage(images[index]);
-    }, 3000);
+    }, 3000); // Change every 3 seconds
     return () => clearInterval(interval);
   }, []);
 
   return (
     <ImageBackground source={bgImage} style={styles.background}>
+      <View />
+        <Button buttonPress={() => router.push("/apiTest")} text="Api Test" />
+      <View />
       <View style={styles.overlay}>
         <Text style={styles.title}>Welcome to the Sports Booking App</Text>
-        <Button buttonPress={() => router.push("/login2")} text="Login" />
-        <Button buttonPress={() => router.push("/signup")} text="Sign Up" />
+        <Button buttonPress={() => router.push("/SelectSport")} text="Select Sport" />
       </View>
     </ImageBackground>
   );
@@ -43,8 +46,7 @@ const styles = StyleSheet.create({
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.4)",
     padding: 20,
-    borderRadius: 10,
-    alignItems: "center"
+    borderRadius: 10
   },
   title: {
     fontSize: 24,
@@ -52,5 +54,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     marginBottom: 20
-  }
+  },
 });
+
